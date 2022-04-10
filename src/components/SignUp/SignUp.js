@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./SignUp.css";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
@@ -9,8 +9,8 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate()
-  const [createUserWithEmailAndPassword, user,, hookError] =
+  const navigate = useNavigate();
+  const [createUserWithEmailAndPassword, user, , hookError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailBlur = (e) => {
@@ -23,10 +23,12 @@ const SignUp = () => {
   const handleConfirmPasswordBlur = (e) => {
     setConfirmPassword(e.target.value);
   };
-  
-  if (user) {
-    navigate('/shop')
-  }
+
+  useEffect(() => {
+    if (user) {
+      navigate("/shop");
+    }
+  });
 
   const handleCreateUser = (e) => {
     e.preventDefault();
@@ -38,9 +40,8 @@ const SignUp = () => {
       setError("Password Must be 6 Characters or longer");
       return;
     }
-    createUserWithEmailAndPassword(email, password)
+    createUserWithEmailAndPassword(email, password);
   };
-
 
   return (
     <div className="form-container">
