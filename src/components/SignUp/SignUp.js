@@ -10,7 +10,7 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate()
-  const [createUserWithEmailAndPassword, user, loading, hookError] =
+  const [createUserWithEmailAndPassword, user,, hookError] =
     useCreateUserWithEmailAndPassword(auth);
 
   const handleEmailBlur = (e) => {
